@@ -13,7 +13,7 @@ final AS (
          case
              when base_experience >= 200 THEN 'legendary'
              when base_experience >= 100 THEN 'strong'
-             else 'nomal'
+             else 'normal'
          end AS power_tier
     from pokemon
 ) 

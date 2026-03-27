@@ -1,0 +1,8 @@
+models:
+  - name: obt_pokemon
+    columns:
+      - name: power_tier
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['legendary','strong','normal']

@@ -1,0 +1,75 @@
+version: 2
+models:
+  - name: stg_pokemon
+    description: "Datos de Pokemon limpiados desde la API"
+    columns:
+    - name: pokemon_id
+      description: "ID único del Pokemon"
+      tests:
+        - unique
+        - not_null
+    - name: pokemon_name
+      description: "Nombre del Pokemon"
+      tests:
+        - not_null
+    - name: height
+      tests:
+        - not_null
+    - name: weight
+      tests:  
+        - not_null
+    - name: height
+      tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+           arguments:
+             min_value: 1
+             max_value: 200
+    - name: base_experience
+      tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+           arguments:
+             min_value: 0
+             max_value: 1000
+    - name: pokemon_name
+      tests:
+        - dbt_expectations.expect_column_values_to_match_regex:
+            regex: "^[a-z\\-]+$"
+  - name: obt_exchange_rates
+    description: "Tabla OBT con tasas de cambio"
+    columns:
+    - name: date
+      description: "Fecha del tipo de cambio"
+      tests:
+        - not_null
+    - name: base_currency
+      description: "Moneda base"
+      tests:
+        - not_null
+
+    - name: target_currency
+      description: "Moneda destino"
+      tests:
+        - not_null
+    - name: exchange_rate
+      description: "Valor del tipo de cambio"
+      tests:
+        - not_null
+    - name: exchange_rate
+      tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+           arguments:
+             min_value: 0
+             strictly: true
+
+    - name: date
+      tests:
+        - dbt_expectations.expect_column_values_to_be_between:
+           arguments:
+             min_value: '2000-01-01'
+             max_value: '2100-01-01'
+
+    - name: base_currency
+      tests:
+        - dbt_expectations.expect_column_values_to_not_be_null:
+            arguments: {}
+    
