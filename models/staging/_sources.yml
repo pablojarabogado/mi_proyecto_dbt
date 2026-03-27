@@ -1,0 +1,8 @@
+version: 2
+sources:
+  - name: raw
+    database: airbyte_curso
+    schema: main
+    tables:
+      - name: pokemon
+      - name: exchange_rates
