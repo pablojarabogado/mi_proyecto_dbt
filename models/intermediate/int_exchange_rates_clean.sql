@@ -1,4 +1,4 @@
- 
+/*
 WITH cleaned AS (
     SELECT
         date,
@@ -10,4 +10,12 @@ WITH cleaned AS (
       AND exchange_rate > 0
 )
 
-SELECT * FROM cleaned
+SELECT * FROM cleaned*/
+
+select
+    date,
+    upper(base_currency) as base_currency,
+    upper(target_currency) as target_currency,
+    exchange_rate
+from {{ ref('stg_exchange_rates') }}
+where exchange_rate is not null

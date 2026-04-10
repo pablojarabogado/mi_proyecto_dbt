@@ -6,4 +6,5 @@ sources:
     tables:
       - name: pokemon
       - name: exchange_rates
+      - name: rest_countries
 

@@ -1,5 +1,5 @@
 -- models/staging/stg_exchange_rates.sql
-WITH source AS (
+/*WITH source AS (
     SELECT
         base AS base_currency,
         date::DATE AS date,
@@ -25,4 +25,34 @@ exploded AS (
 )
 
 SELECT *
-FROM exploded
+FROM exploded*/
+with source as (
+
+    select * 
+    from airbyte_curso.main.exchange_rates
+
+),
+
+flatten as (
+
+    select
+        base as base_currency,
+        date,
+        json_extract(rates, '$') as rates_json
+    from source
+
+),
+
+final as (
+
+    select
+        base_currency,
+        date,
+        key as target_currency,
+        cast(json_extract(rates_json, '$.' || key) as double) as exchange_rate
+    from flatten,
+    unnest(json_keys(rates_json)) as t(key)
+
+)
+
+select * from final

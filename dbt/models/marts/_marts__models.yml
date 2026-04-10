@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_daily_sales
+    description: "Métricas de ventas agregadas por día"
+    columns:
+      - name: date
+        tests:
+          - unique
+          - not_null
+      - name: conversion_rate
+        description: "Porcentaje de sesiones que convirtieron a órdenes"
+
+  - name: fct_channel_performance
+    description: "Performance por canal de marketing"
+    columns:
+      - name: session_month
+        tests:
+          - not_null
+      - name: conversion_rate
+        description: "Tasa de conversión del canal"
+
+  - name: fct_product_performance
+    description: "Performance por producto"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+
+  - name: obt_orders_enriched
+    description: "One Big Table con órdenes y contexto completo"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null

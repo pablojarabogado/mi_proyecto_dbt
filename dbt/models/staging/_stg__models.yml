@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: stg_sessions
+    description: "Sesiones web limpiadas y estandarizadas"
+    columns:
+      - name: website_session_id
+        description: "ID único de la sesión"
+        tests:
+          - unique
+          - not_null
+      - name: utm_source
+        description: "Fuente de tráfico (nunca null, default 'direct')"
+        tests:
+          - not_null
+      - name: device_type
+        description: "Tipo de dispositivo"
+        tests:
+          - accepted_values:
+              values: ['mobile', 'desktop']
+
+  - name: stg_orders
+    description: "Órdenes limpiadas con margen calculado"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: price_usd
+        tests:
+          - not_null
+      - name: margin_usd
+        description: "Margen = price_usd - cogs_usd"
+
+  - name: stg_order_items
+    description: "Items de órdenes con nombre de producto"
+    columns:
+      - name: order_item_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_pageviews
+    description: "Pageviews limpiados"
+    columns:
+      - name: website_pageview_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_refunds
+    description: "Reembolsos procesados"
+    columns:
+      - name: order_item_refund_id
+        tests:
+          - unique
+          - not_null

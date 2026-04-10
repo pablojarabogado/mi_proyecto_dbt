@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Datos crudos extraídos de MySQL via Airbyte"
+    database: airbyte_curso
+    schema: main
+    tables:
+      - name: website_sessions
+        description: "Sesiones de usuarios en el sitio web"
+      - name: website_pageviews
+        description: "Páginas visitadas por sesión"
+      - name: products
+        description: "Catálogo de productos"
+      - name: orders
+        description: "Órdenes realizadas"
+      - name: order_items
+        description: "Items individuales dentro de cada orden"
+      - name: order_item_refunds
+        description: "Reembolsos procesados"
